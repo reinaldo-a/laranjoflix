@@ -60,6 +60,62 @@
             }
             
 
+    } else if($type === "edit") {
+
+        $id = filter_input(INPUT_POST, "id");
+        $name = filter_input(INPUT_POST, "name");
+        $lastname = filter_input(INPUT_POST, "lastname");
+        $email = filter_input(INPUT_POST, "email");
+        $image = filter_input(INPUT_POST, "image");
+
+        $userData->id = $id;
+        $userData->name = $name;
+        $userData->lastname = $lastname;
+        $userData->email = $email;
+        $userData->image = $image;
+
+        if(isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
+
+            $imageData = $_FILES["image"];
+            $image = $_FILES["image"]["tmp_name"];
+            $imageType = ["image/jpeg", "image/jpg", "image/png"];
+
+            if(in_array($imageData["type"], $imageType)) {
+                
+                $extension = pathinfo($imageData["name"], PATHINFO_EXTENSION);
+                
+                $imageName = $userData->generateImageName($extension);
+                
+                move_uploaded_file($_FILES["image"]["tmp_name"],"$destination_file/Laranjoflix/laranjo5flix/img/users/$imageName");
+
+                $userData->image = $imageName;
+
+            } else {
+                $message->setMessage("Add uma img em jpg ou png.", "error", "newMovie.php");
+                exit;
+            }
+    
+        }
+
+        $userDao->editUser($userData);
+
+        $message->setMessage("Perfil editado com sucesso.", "success", "profile.php");
+
+    } else if($type === "editPassword") {
+
+        $password = filter_input(INPUT_POST, "password");
+        $confirmPasswoed = filter_input(INPUT_POST, "confirmPassword");
+
+        if($password === $confirmPasswoed) {
+            $passwordFinal = $userData->generatePassword($password);
+        } else {
+            $message->setMessage("As senhas não corespondem!", "error", "register.php");
+        }
+
+        $message->setMessage("Senha atualizada com sucesso!", "success", "back");
+
+        $userDao->editPassword($passwordFinal);
+
     } else if($type === "login") {
 
         $email = filter_input(INPUT_POST, "email");
@@ -78,5 +134,5 @@
         }
 
     } else{
-        $message->setMessage("Dados invalidos!", "error", "register.php");
+        $message->setMessage("Dados invalidos!", "error", "index.php");
     }

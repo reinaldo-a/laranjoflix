@@ -37,6 +37,37 @@
 
         }
 
+        public function editUser($userData) {
+
+            $stmt = $this->conn->prepare("UPDATE users SET 
+            name = :name, 
+            lastname = :lastname, 
+            email = :email,
+            image = :image
+            WHERE id = :id
+            ");
+
+            $stmt->bindParam(":name", $userData->name);
+            $stmt->bindParam(":lastname", $userData->lastname);
+            $stmt->bindParam(":email", $userData->email);
+            $stmt->bindParam(":image", $userData->image);
+            $stmt->bindParam(":id", $userData->id);
+
+            return $stmt->execute();
+
+        }
+
+        public function editPassword($password) {
+
+            $stmt = $this->conn->prepare("UPDATE users SET 
+            password = :password 
+            ");
+
+            $stmt->bindParam(":password", $password);
+
+            return $stmt->execute();
+        }
+
         //Generate user
         public function buildUser($userArray) {
 

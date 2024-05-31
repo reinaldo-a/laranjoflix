@@ -23,7 +23,7 @@
                 <div class="col-lg-6">
                     <div class="login__form">
                         <h3>Conecte-se</h3>
-                        <form action="login_process.php" method="POST">
+                        <form action="user_process.php" method="POST">
                             <input type="hidden" name="type" value="login">
                             <div class="input__item">
                                 <input type="email" placeholder="Email" name="email" required>

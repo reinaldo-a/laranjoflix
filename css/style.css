@@ -2347,7 +2347,7 @@ ol {
 
 .msg {
 	width: 60%;
-	margin: 40px auto 0px auto;
+	margin: 40px auto 20px auto;
 	padding: 10px;
 	border: solid 1px #000;
 	text-align: center;
@@ -2364,3 +2364,32 @@ ol {
 	background-color: #c8e9da;
 	border-color: #a9ddc6;
   }
+
+
+  /* Edit Profile */
+#profile-image-container,
+.profile-image-container {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #3b220a;
+  border-radius: 100%;
+  background-size: cover;
+  background-position: center;
+  margin: 0px auto;
+}
+
+.profile-image-container {
+  width: 40px;
+  height: 40px;
+  margin: 0;
+}
+
+#profile-image-container {
+	width: 250px;
+	height: 250px; margin-bottom: 30px;
+}
+
+.img {
+	padding: 60px;
+}
+

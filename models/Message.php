@@ -18,7 +18,7 @@ use function PHPSTORM_META\type;
             if($redirect != "back") {
                 header("Location: $this->url/" . $redirect);
             } else {
-                header("Location:" . $_SESSION["HTTP_REFERER"]);
+                header("Location:" . $_SERVER["HTTP_REFERER"]);
             }
             
         }

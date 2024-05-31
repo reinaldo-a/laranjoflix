@@ -23,6 +23,13 @@
     interface MovieDAOInterface {
 
         public function create($userData);
+        public function getMovies();
+        public function findById($id);
+        public function findByUsers_id($users_id);
+        public function buildMovie($arrayMovie);
+        public function edit($movirData);
+        public function delete($id);
+
         
     }
 

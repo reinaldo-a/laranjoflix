@@ -16,7 +16,7 @@
     if(!empty($flassMessage["msg"])) {
         $message->dropMessage();
     }
-    
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -65,9 +65,9 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
+                        <nav class="header__menu mobile-menu">  
                             <ul>
-                                <li class="active"><a href="<?= $BASE_URL ?>/index.php">Pagina Inicial</a></li>
+                                <li><a href="<?= $BASE_URL ?>/index.php">Pagina Inicial</a></li>
                                 <li><a href="./categories.html">Categorias<span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="./categories.html">Categories</a></li>
@@ -80,7 +80,7 @@
                                 </li>
                                 <li><a href="<?= $BASE_URL ?>/newMovie.php">Adicionar Filme</a></li>
                                 <?php if(!empty($userData)): ?>
-                                    <li><a href="teste.php">Meus Filmes</a></li>
+                                    <li><a href="dashboard.php">Meus Filmes</a></li>
                                 <?php endif;?>
                             </ul>
                         </nav>
@@ -91,9 +91,9 @@
                         <a href="#" class="search-switch"><span class="icon_search"></span></a>
                         <?php if(!empty($userData)): ?>
                             <?php if(!empty($userData->image)): ?>
-                                <a href="<?= $BASE_URL ?>/#"><img src="<?= $BASE_URL ?>/img/users/<?= $userData->image ?>" alt="user image"></a>
+                                <a href="<?= $BASE_URL ?>/profile.php"><img class="profile-image-container" src="<?= $BASE_URL ?>/img/users/<?= $userData->image ?>" alt="user image"></a>
                             <?php else: ?>
-                            <a href="<?= $BASE_URL ?>/login.php"><span class="icon_profile"></span></a>
+                            <a href="<?= $BASE_URL ?>/profile.php"><span class="icon_profile"></span></a>
                             <?php endif; ?>
                             <a href="<?= $BASE_URL ?>/logout.php">Sair</a>
                         <?php else: ?>
