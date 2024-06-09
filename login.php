@@ -1,21 +1,11 @@
 <?php 
     require_once("templates/header.php");
 
+    //If the user is already logged in they will be redirected
     if($userData) {
         $message->setMessage("Você já está logado.", "error", "index.php");
     }
 ?>
-    <section class="normal-breadcrumb set-bg" data-setbg="<?= $BASE_URL ?>/img/normal-breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="normal__breadcrumb__text">
-                        <h2>Conecte-se</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Login Section Begin -->
     <section class="login spad">
         <div class="container">

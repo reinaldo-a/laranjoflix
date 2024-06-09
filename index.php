@@ -3,17 +3,19 @@
     require_once("dao/MovieDAO.php");
     require_once("models/Movie.php");
 
+    // instantiating objects
     $movieData = new Movie;
     $userDao = new UserDAO($conn, $BASE_URL);
     $movieDao = new MovieDAO($conn, $BASE_URL);
 
-
+    //checking the validity of the user token.
     if(!empty($_SESSION["token"])) {
 
         $userData = $userDao->findByToken(false);
 
     }
 
+    //search for movie list in database
     $movies = $movieDao->getMovies();
 
 ?>
@@ -69,6 +71,7 @@
                             </div>
                         </div>
                         <div class="row">
+                            <!-- list of films by repetition structure -->
                             <?php foreach($movies as $movieData): ?>
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div class="product__item">

@@ -1,5 +1,6 @@
 <?php 
 
+    //movie object
     class Movie {
 
         public $id;
@@ -20,6 +21,7 @@
 
     }
 
+    //movie inteface. 
     interface MovieDAOInterface {
 
         public function create($userData);

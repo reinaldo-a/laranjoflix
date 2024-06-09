@@ -5,6 +5,7 @@
     require_once("globals.php");
     require_once("models/Message.php");
 
+    // instantiating objects
     $userData = new User;
     $userDao = new UserDAO($conn, $BASE_URL);
     $message = new Message($BASE_URL);
@@ -23,7 +24,6 @@
         $confirmPasswoed = filter_input(INPUT_POST, "confirmPassword");
 
         /* verify data */
-
         if(!empty($name) && !empty($lastname) && !empty($email) && !empty($password) && !empty($confirmPasswoed)) {
 
             $data = $userDao->findByEmail($email);
@@ -33,7 +33,6 @@
                 if($password === $confirmPasswoed) {
                     $passwordFinal = $userData->generatePassword($password);
                 } else {
-                    /* messagem de erro */
                     $message->setMessage("As senhas não corespondem!", "error", "register.php");
                 }
 
@@ -59,7 +58,7 @@
                 $message->setMessage("Prencha todos os campos!", "error", "register.php");
             }
             
-
+    /* Process the edit user. */
     } else if($type === "edit") {
 
         $id = filter_input(INPUT_POST, "id");
@@ -86,7 +85,7 @@
                 
                 $imageName = $userData->generateImageName($extension);
                 
-                move_uploaded_file($_FILES["image"]["tmp_name"],"$destination_file/Laranjoflix/laranjo5flix/img/users/$imageName");
+                move_uploaded_file($_FILES["image"]["tmp_name"],"$destination_file/Laranjoflix/laranjoflix/img/users/$imageName");
 
                 $userData->image = $imageName;
 
@@ -116,6 +115,7 @@
 
         $userDao->editPassword($passwordFinal);
 
+    /* Process the login. */
     } else if($type === "login") {
 
         $email = filter_input(INPUT_POST, "email");

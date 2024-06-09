@@ -1,5 +1,4 @@
 <?php 
-
     require_once("models/Movie.php");
     require_once("models/Message.php");
 
@@ -9,16 +8,21 @@
         private $conn;
         private $url;
 
+
         public function __construct($conn, $url)
-        {
+        {   
+            //database connection.
             $this->conn = $conn;
+
+            //Global URL with server path.
             $this->url = $url;
+
+            //object to print messages.
             $this->message = new Message($url);
         }
 
+        //inserting movie into database
         public function create($userData) {
-
-           // var_dump($userData->title);exit;
 
             $stmt = $this->conn->prepare(" INSERT INTO
             movies(title, description, category, link, quality, image, date, length, users_id) 
@@ -40,6 +44,7 @@
 
         }
 
+        //getting movies from database
         public function getMovies() {
 
             $stmt = $this->conn->prepare("SELECT * FROM movies");
@@ -57,6 +62,7 @@
             return $movies;
         }
 
+        //searching for movie using your id
         public function findById($id) {
 
             if(isset($id) && !empty($id)) {
@@ -78,6 +84,7 @@
 
         }
 
+        //searching for movies by user id
         public function findByUsers_id($users_id) {
             
             if(isset($users_id) && !empty($users_id)) {
@@ -95,12 +102,19 @@
                     $movies[] = $this->buildMovie($movie);
                     
                 }
+
+                if(!empty($movies)) {
+                    return $movies;
+                } else {
+                    false;
+                }
+            } else {
+                $this->message->setMessage("Erro ao detectar o úsuario", "error", "index.php");
             }
-            
-            return $movies;
 
         }
 
+        //building object film
         public function buildMovie($movieArray) {
             
             $movieData = new Movie;
@@ -120,6 +134,7 @@
 
         }
 
+        //edit film
         public function edit($movieData) {
 
             $stmt = $this->conn->prepare("UPDATE movies SET 
@@ -149,7 +164,8 @@
             $this->message->setMessage("Filme atualizado com sucesso!", "success", "dashboard.php");
 
         }
-
+        
+        //delete movie
         public function delete($id) {
 
             $stmt = $this->conn->prepare("DELETE FROM movies WHERE id = :id");

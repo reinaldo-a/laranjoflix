@@ -2,9 +2,11 @@
     require_once("templates/header.php");
     require_once("models/Movie.php");
 
+    // instantiating objects
     $movieData = new Movie;
     $userDao = new UserDAO($conn, $BASE_URL);
 
+    /* checking validity of the user's token, if it is not valid the user will be redirected to carry out something */
     if(!empty($_SESSION["token"])) {
 
         $userData = $userDao->findByToken(true);

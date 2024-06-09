@@ -3,16 +3,24 @@
     require_once("models/Movie.php");
     require_once("dao/MovieDAO.php");
 
+    // instantiating objects
     $userDao = new UserDAO($conn, $BASE_URL);
     $movieDao = new MovieDAO($conn, $BASE_URL);
     $movieData = new Movie;
 
+    /* checking validity of the user's token, if it is not valid the user will be redirected to carry out something */
     if(!empty($_SESSION["token"])) {
+
         $userData = $userDao->findByToken(true);
+
+    } else {
+        $message->setMessage("É nescessario realizar login.", "error", "login.php");
     }
 
+    //getting movie id
     $id = filter_input(INPUT_GET, "id");
 
+    //search for movie data based on its id
     $movieData = $movieDao->findById($id);
 ?>
     <section class="normal-breadcrumb set-bg" data-setbg="<?= $BASE_URL ?>/img/normal-breadcrumb.jpg">

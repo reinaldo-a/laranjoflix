@@ -1,22 +1,12 @@
 <?php 
     require_once("templates/header.php");
 
+    //If the user is already logged in they will be redirected
     if($userData) {
         $message->setMessage("Você já está logado. Para criar uma nova conta, por favor, saia da sua conta atual primeiro.", "error", "index.php");
     }
     
 ?>
-    <section class="normal-breadcrumb set-bg" data-setbg="<?= $BASE_URL ?>/img/normal-breadcrumb.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="normal__breadcrumb__text">
-                        <h2>Cadastre-se</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Start of registration section -->
     <section class="login spad">
         <div class="container">

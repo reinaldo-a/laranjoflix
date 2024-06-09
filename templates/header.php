@@ -47,11 +47,6 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
     <!-- Header Section Begin -->
     <header class="header">
         <div class="container">
@@ -102,7 +97,6 @@
                     </div>
                 </div>
             </div>
-            <div id="mobile-menu-wrap"></div>
         </div>
     </header>
     <?php 

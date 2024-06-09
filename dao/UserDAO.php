@@ -15,7 +15,7 @@
         {
             $this->conn = $conn;
             $this->url = $url;
-            $this->message = new Message($conn);
+            $this->message = new Message($url);
         }
 
         
@@ -37,6 +37,7 @@
 
         }
 
+        //edit user
         public function editUser($userData) {
 
             $stmt = $this->conn->prepare("UPDATE users SET 
@@ -57,6 +58,7 @@
 
         }
 
+        //edit password
         public function editPassword($password) {
 
             $stmt = $this->conn->prepare("UPDATE users SET 
@@ -85,7 +87,7 @@
 
         }
 
-        //Buscar por email
+        //returns the user from his email
         public function findByEmail($email) {
 
             if(isset($email)) {
@@ -110,7 +112,33 @@
 
         }
 
-        //
+        //search for the user by their id
+        public function findById($id) {
+
+            if(isset($id)) {
+
+                $stmt = $this->conn->prepare("SELECT * FROM users WHERE id = :id");
+                
+                $stmt->bindParam(":id", $id);
+    
+                //Run the Query
+                $stmt->execute();
+    
+                // Fetch all results
+                $userArray = $stmt->fetch();
+    
+                $userData = $this->buildUser($userArray);
+    
+                return $userData;
+    
+            } else {
+                return false;
+            }
+
+        }
+
+
+        //returns user data if he is logged in
         public function findByToken($protect = false) {
 
             if(!empty($_SESSION['token'])) {
@@ -132,17 +160,20 @@
 
             } else if($protect === true) {
 
-                $this->message->getMessage("É necessario fazer login!", "error", "register.php ");
+                return $this->message->setMessage("É necessario fazer login!", "error", "register.php ");
 
             } else {
                 return false;
             }
         }
 
+        //user will be disconnected
         public function destroyToken() {
 
             $_SESSION["token"] = "";
             $_SESSION["type"] = "";
+
+            $this->message->setMessage("", "success", "login.php");
 
         }
 
